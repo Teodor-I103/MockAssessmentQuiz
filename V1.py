@@ -1,9 +1,16 @@
+quiz_questions = {
+    "What is the formula for cubic parabola's?": ["y = ax^2+bx+c", "y = ax^3+bx^2+cx+d", "r^2 = (x-a)^2 + (y+b)^2"],
+    "Differentiate f(x) = 2x^2+4x+6 	If x = 2": ["f'(2) = 6", "f'(2) = 5", "f'(2) = 12", "f'(2) = 40"],
+    "Find the gradient of f(x) = 4x^2+2x+7	When y = 6": ["f'(x) = 8x - 4", "f'(x) = 4x + 8", "f'(x) = 8x + 8", "f'(x) = 4x - 4"],
+    "If the gradient of a function is f'(x) = 4x + 2, find f(x) if it passes through (2,4)": ["f(x) = 4x^2 +2x + 8", "f(x) = 2x^2 + 4x + 2", "f(x) = 4x^2 + 4x + 8", "f(x) = 2x^2 + 2x - 8"],
+    "What is the coordinate of the turning point of f(x) = 4x^2 + 2x + 5": ["(0.25, -4.75)","(0.25, 4.75)" ,"(-0.25 , 4.75)", "(4.75 , -0.25)"]
+    }
+
 MAX_AGE = 18
 MIN_AGE = 12
 
 def Play_Quiz():
     
-
 def User_Age():
     while True:
         try:
@@ -21,6 +28,7 @@ def User_Age():
                 break
         except ValueError:
             print("Please enter an integer.")
+    Option_Select()
 
 
 def Quiz_Description():
