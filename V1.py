@@ -4,13 +4,52 @@ quiz_questions = {
     "Find the gradient of f(x) = 4x^2+2x+7	When y = 6": ["f'(x) = 8x - 4", "f'(x) = 4x + 8", "f'(x) = 8x + 8", "f'(x) = 4x - 4"],
     "If the gradient of a function is f'(x) = 4x + 2, find f(x) if it passes through (2,4)": ["f(x) = 4x^2 +2x + 8", "f(x) = 2x^2 + 4x + 2", "f(x) = 4x^2 + 4x + 8", "f(x) = 2x^2 + 2x - 8"],
     "What is the coordinate of the turning point of f(x) = 4x^2 + 2x + 5": ["(0.25, -4.75)","(0.25, 4.75)" ,"(-0.25 , 4.75)", "(4.75 , -0.25)"]
-    }
+}
+
+correct_answers = {
+    "What is the formula for cubic parabola's?": "y = ax^3+bx^2+cx+d",
+    "Differentiate f(x) = 2x^2+4x+6 	If x = 2": "f'(2) = 12",
+    "Find the gradient of f(x) = 4x^2+2x+7	When y = 6": "f'(x) = 8x + 8",
+    "If the gradient of a function is f'(x) = 4x + 2, find f(x) if it passes through (2,4)": "f(x) = 2x^2 + 2x - 8",
+    "What is the coordinate of the turning point of f(x) = 4x^2 + 2x + 5": "(-0.25 , 4.75)"
+}
 
 MAX_AGE = 18
 MIN_AGE = 12
 
 def Play_Quiz():
-    
+    score = 0
+    for question, options in quiz_questions.items():
+        print("\n" + question)
+        for i, option in enumerate(options):
+            print(f"{i+1}. {option}")
+        while True:
+            try:
+                answer = int(input("Enter the option number: "))
+                if 1 <= answer <= len(options):
+                    selected = options[answer - 1]
+                    if selected == correct_answers[question]:
+                        print("Correct!\n")
+                        score += 1
+                    else:
+                        print(f"Wrong. Correct answer: {correct_answers[question]}\n")
+                    break
+                else:
+                    print(f"Please enter a number between 1 and {len(options)}")
+            except ValueError:
+                print("Please enter a valid number.")
+    print(f"Quiz finished! Your score is {score}/{len(quiz_questions)}\n")
+    return score
+
+def Display_Score(score):
+    print(f"\nYour most recent quiz score: {score}/{len(quiz_questions)}\n")
+    input("Press Enter to return to the menu.")
+    Option_Select(score)
+
+def Quit_Quiz():
+    print("Thanks for playing the quiz. Goodbye!")
+    exit()
+
 def User_Age():
     while True:
         try:
@@ -24,37 +63,40 @@ def User_Age():
             elif user_age <= 0:
                 print("Enter an integer above 0")
             else:
-                Option_Select()
+                Option_Select(0)
                 break
         except ValueError:
             print("Please enter an integer.")
-    Option_Select()
-
 
 def Quiz_Description():
-    with open('Description.txt','r')as f:
-        Description = f.read()
-        print(Description)
-        input("\nType anything to continue: ")
+    try:
+        with open('Description.txt', 'r') as f:
+            description = f.read()
+            print(description)
+    except FileNotFoundError:
+        print("Description file not found. Continuing without it.")
+    input("\nType anything to continue: ")
     User_Age()
 
-def Option_Select():
-    print("1. Play Quiz\n2. View Score\n3. Quit")
+def Option_Select(current_score):
+    print("\n1. Play Quiz\n2. View Score\n3. Quit")
     while True:
         try:
             user_option = int(input("Enter an option: "))
-            if user_option > 3:
-                print("Please enter an integer between 1 - 3")
-            elif user_option <= 0:
+            if user_option == 1:
+                new_score = Play_Quiz()
+                Option_Select(new_score)
+                break
+            elif user_option == 2:
+                Display_Score(current_score)
+                break
+            elif user_option == 3:
+                Quit_Quiz()
+                break
+            else:
                 print("Please enter an integer between 1 - 3")
         except ValueError:
-            print("Please enter an integer between 1 - 3")
-        if user_option == 1:
-            Play_Quiz()
-        elif user_option == 2:
-            Display_Score()
-        elif user_option == 3:
-            Quit_Quiz()
-            
+            print("Please enter a valid integer.")
+
 Quiz_Description()
 print("Goodbye!")
