@@ -1,5 +1,5 @@
 quiz_questions = {
-    "What is the formula for cubic parabola's?": ["y = ax^2+bx+c", "y = ax^3+bx^2+cx+d", "r^2 = (x-a)^2 + (y+b)^2"],
+    "What is the formula for cubic parabola's?": ["y = ax^2+bx+c", "y = ax^3+bx^2+cx+d", "r^2 = (x-a)^2 + (y+b)^2", "y = mx + c"],
     "Differentiate f(x) = 2x^2+4x+6 	If x = 2": ["f'(2) = 6", "f'(2) = 5", "f'(2) = 12", "f'(2) = 40"],
     "Find the gradient of f(x) = 4x^2+2x+7	When y = 6": ["f'(x) = 8x - 4", "f'(x) = 4x + 8", "f'(x) = 8x + 8", "f'(x) = 4x - 4"],
     "If the gradient of a function is f'(x) = 4x + 2, find f(x) if it passes through (2,4)": ["f(x) = 4x^2 +2x + 8", "f(x) = 2x^2 + 4x + 2", "f(x) = 4x^2 + 4x + 8", "f(x) = 2x^2 + 2x - 8"],
@@ -67,14 +67,11 @@ def User_Age():
                 break
         except ValueError:
             print("Please enter an integer.")
-
+            
 def Quiz_Description():
-    try:
-        with open('Description.txt', 'r') as f:
-            description = f.read()
-            print(description)
-    except FileNotFoundError:
-        print("Description file not found. Continuing without it.")
+    with open('Description.txt', 'r') as f:
+        description = f.read()
+        print(description)
     input("\nType anything to continue: ")
     User_Age()
 
